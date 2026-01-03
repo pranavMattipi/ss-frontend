@@ -148,7 +148,7 @@ Image: ${imgText}`
           onClick={() => setModalImg(selectedImg)}
         />
         {/* Thumbnails for selection */}
-        <div className="flex gap-3 mb-4">
+        <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 mb-4 w-full max-w-xs">
           {images.map((img, idx) => (
             <img
               key={idx}
