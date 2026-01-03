@@ -158,23 +158,29 @@ const ProductSection = ({ title, items, refObj, scrollSection, type }) => {
           ref={refObj}
           className="flex overflow-x-auto gap-6 pb-4 px-10"
         >
-          {items.map((item, idx) => (
-            <Link
-              to={item._id ? `/${type}/${item._id}` : '#'}
-              key={item._id || idx}
-              className="min-w-56 bg-white rounded-lg shadow-xl p-4 flex flex-col items-center hover:shadow-2xl transition"
-            >
-              <img
-                src={(item.images && item.images[0]) || "https://via.placeholder.com/128"}
-                alt={item.name}
-                className="w-48 h-48 object-cover rounded mb-2"
-              />
-              <div className="font-medium">{item.name}</div>
-              <div className="text-[#670E33] font-bold">
-                ₹{item.price}
-              </div>
-            </Link>
-          ))}
+          {items.map((item, idx) => {
+            const imageUrl = item.images && item.images[0]
+              ? (item.images[0].startsWith('http') ? item.images[0] : `https://ss-backend-sage.vercel.app/${item.images[0].replace(/^\\/+/, '')}`)
+              : "https://via.placeholder.com/128";
+
+            return (
+              <Link
+                to={item._id ? `/${type}/${item._id}` : '#'}
+                key={item._id || idx}
+                className="min-w-56 bg-white rounded-lg shadow-xl p-4 flex flex-col items-center hover:shadow-2xl transition"
+              >
+                <img
+                  src={imageUrl}
+                  alt={item.name}
+                  className="w-48 h-48 object-cover rounded mb-2"
+                />
+                <div className="font-medium">{item.name}</div>
+                <div className="text-[#670E33] font-bold">
+                  ₹{item.price}
+                </div>
+              </Link>
+            );
+          })}
 
           {/* VIEW ALL CARD */}
           <Link
