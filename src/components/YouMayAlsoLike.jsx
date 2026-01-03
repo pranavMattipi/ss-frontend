@@ -46,7 +46,12 @@ const YouMayAlsoLike = ({ title, products, type }) => {
           style={{ width: '100vw', minWidth: 0 }}
         >
           {visibleProducts.map((item) => {
-            const imageUrl = Array.isArray(item.images) && item.images.length > 0 ? item.images[0] : "https://via.placeholder.com/200?text=No+Image";
+            let imageUrl = "https://via.placeholder.com/200?text=No+Image";
+            if (Array.isArray(item.images) && item.images.length > 0) {
+              imageUrl = item.images[0].startsWith('http')
+                ? item.images[0]
+                : `https://ss-backend-sage.vercel.app/${item.images[0].replace(/^\/+/,'')}`;
+            }
             const to = type === "jewellery" ? `/jewellery/${item._id}` : `/dresses/${item._id}`;
             return (
               <a

@@ -39,11 +39,12 @@ const AllProducts = () => {
   const renderProducts = (items, type) => (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {items.map((item, idx) => {
-        const imageUrl =
-          Array.isArray(item.images) && item.images.length > 0
+        let imageUrl = "https://via.placeholder.com/300?text=No+Image";
+        if (Array.isArray(item.images) && item.images.length > 0) {
+          imageUrl = item.images[0].startsWith('http')
             ? item.images[0]
-            : "https://via.placeholder.com/300?text=No+Image";
-
+            : `https://ss-backend-sage.vercel.app/${item.images[0].replace(/^\/+/,'')}`;
+        }
         return (
           <Link
             to={

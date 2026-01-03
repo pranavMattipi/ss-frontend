@@ -159,10 +159,12 @@ const ProductSection = ({ title, items, refObj, scrollSection, type }) => {
           className="flex overflow-x-auto gap-6 pb-4 px-10"
         >
           {items.map((item, idx) => {
-            const imageUrl = item.images && item.images[0]
-              ? (item.images[0].startsWith('http') ? item.images[0] : `https://ss-backend-sage.vercel.app/${item.images[0].replace(/^\\/+/, '')}`)
-              : "https://via.placeholder.com/128";
-
+            let imageUrl = "https://via.placeholder.com/128";
+            if (item.images && item.images[0]) {
+              imageUrl = item.images[0].startsWith('http')
+                ? item.images[0]
+                : `https://ss-backend-sage.vercel.app/${item.images[0].replace(/^\/+/, '')}`;
+            }
             return (
               <Link
                 to={item._id ? `/${type}/${item._id}` : '#'}
