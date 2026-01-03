@@ -77,3 +77,4 @@ const About = () => {
 };
 
 export default About;
+// No direct axios calls in About.jsx, so no changes needed unless you add API calls.

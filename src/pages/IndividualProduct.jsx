@@ -19,7 +19,7 @@ const IndividualProduct = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/api/${type}/${id}`)
+      .get(`https://ss-backend-sage.vercel.app/api/${type}/${id}`)
       .then((res) => {
         setProduct(res.data);
         setLoading(false);
@@ -32,8 +32,8 @@ const IndividualProduct = () => {
 
   // Fetch all jewellery and dresses for recommendations
   useEffect(() => {
-    axios.get("http://localhost:8000/api/jewellery").then(res => setJewellery(res.data)).catch(() => {});
-    axios.get("http://localhost:8000/api/dresses").then(res => setDresses(res.data)).catch(() => {});
+    axios.get("https://ss-backend-sage.vercel.app/api/jewellery").then(res => setJewellery(res.data)).catch(() => {});
+    axios.get("https://ss-backend-sage.vercel.app/api/dresses").then(res => setDresses(res.data)).catch(() => {});
   }, []);
 
   if (loading) return <div className="p-8 text-center">Loading...</div>;

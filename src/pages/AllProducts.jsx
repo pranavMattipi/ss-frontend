@@ -9,7 +9,7 @@ const AllProducts = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/jewellery")
+      .get("https://ss-backend-sage.vercel.app/api/jewellery")
       .then((res) => {
         const sorted = sortLatestFirst(res.data);
         setJewellery(sorted);
@@ -17,7 +17,7 @@ const AllProducts = () => {
       .catch((err) => console.error("Jewellery fetch error:", err));
 
     axios
-      .get("http://localhost:8000/api/dresses")
+      .get("https://ss-backend-sage.vercel.app/api/dresses")
       .then((res) => {
         const sorted = sortLatestFirst(res.data);
         setDresses(sorted);

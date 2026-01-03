@@ -33,14 +33,14 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/jewellery")
+      .get("https://ss-backend-sage.vercel.app/api/jewellery")
       .then((res) => {
         setJewellery(sortLatest(res.data).slice(0, 6));
       })
-      .catch((err) => console.error("Error fetching jewellery:", err));
+      .catch((err) => console.error("Jewellery fetch error:", err));
 
     axios
-      .get("http://localhost:8000/api/dresses")
+      .get("https://ss-backend-sage.vercel.app/api/dresses")
       .then((res) => {
         setDresses(sortLatest(res.data).slice(0, 6));
       })
