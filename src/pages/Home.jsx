@@ -78,7 +78,7 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full min-h-screen" style={{ backgroundColor: '#FFF8E7' }}>
       {/* HERO */}
       <div className="relative w-full h-[70vh] overflow-hidden">
         <img
@@ -141,7 +141,8 @@ const Home = () => {
 
 const ProductSection = ({ title, items, refObj, scrollSection, type }) => {
   return (
-    <div className="px-4 mt-14 bg-white">
+    <div className="px-4 mt-14 "
+    style={{ backgroundColor: '#FFF8E7' }}>
       <h2 className="text-lg font-bold text-[#670E33] mb-3">
         {title}
       </h2>

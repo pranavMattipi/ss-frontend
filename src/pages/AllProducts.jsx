@@ -72,7 +72,7 @@ const AllProducts = () => {
   );
 
   return (
-    <div className="w-full px-6 py-10">
+    <div className="w-full px-6 py-10 min-h-screen" style={{ backgroundColor: '#FFF8E7' }}>
       {/* HEADER */}
       <div className="flex items-center justify-between mb-10">
         <h1 className="text-3xl font-bold text-yellow-900">
