@@ -6,6 +6,8 @@ const AllProducts = () => {
   const [jewellery, setJewellery] = useState([]);
   const [dresses, setDresses] = useState([]);
   const [filter, setFilter] = useState("all"); // all | jewellery | dresses
+  const [loadingJewellery, setLoadingJewellery] = useState(true);
+  const [loadingDresses, setLoadingDresses] = useState(true);
 
   useEffect(() => {
     axios
@@ -13,16 +15,18 @@ const AllProducts = () => {
       .then((res) => {
         const sorted = sortLatestFirst(res.data);
         setJewellery(sorted);
+        setLoadingJewellery(false);
       })
-      .catch((err) => console.error("Jewellery fetch error:", err));
+      .catch((err) => {console.error("Jewellery fetch error:", err); setLoadingJewellery(false);});
 
     axios
       .get("https://ss-backend-sage.vercel.app/api/dresses")
       .then((res) => {
         const sorted = sortLatestFirst(res.data);
         setDresses(sorted);
+        setLoadingDresses(false);
       })
-      .catch((err) => console.error("Dresses fetch error:", err));
+      .catch((err) => {console.error("Dresses fetch error:", err); setLoadingDresses(false);});
   }, []);
 
   // ✅ Sort newest → oldest
@@ -71,12 +75,21 @@ const AllProducts = () => {
     </div>
   );
 
+  const Spinner = () => (
+    <div className="flex items-center justify-center w-full h-48">
+      <svg className="animate-spin h-10 w-10 text-[#670E33]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+      </svg>
+    </div>
+  );
+
   return (
     <div className="w-full px-6 py-10 min-h-screen" style={{ backgroundColor: '#FFF8E7' }}>
       {/* HEADER */}
       <div className="flex items-center justify-between mb-10">
         <h1 className="text-3xl font-bold text-yellow-900">
-          All Products
+          All Products 
         </h1>
 
         {/* FILTER */}
@@ -97,7 +110,7 @@ const AllProducts = () => {
           <h2 className="text-xl font-semibold text-yellow-900 mb-4">
             Jewelleries
           </h2>
-          {renderProducts(jewellery, "jewellery")}
+          {loadingJewellery ? <Spinner /> : renderProducts(jewellery, "jewellery")}
         </div>
       )}
 
@@ -107,7 +120,7 @@ const AllProducts = () => {
           <h2 className="text-xl font-semibold text-yellow-900 mb-4">
             Dresses
           </h2>
-          {renderProducts(dresses, "dresses")}
+          {loadingDresses ? <Spinner /> : renderProducts(dresses, "dresses")}
         </div>
       )}
     </div>
